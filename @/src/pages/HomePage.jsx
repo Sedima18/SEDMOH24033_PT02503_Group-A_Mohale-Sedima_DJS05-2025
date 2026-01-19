@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { fetchPodcasts } from "../api/podcasts";
+import { fetchPodcasts } from "../api/fetchPodcast";
 import PodcastGrid from "../components/PodcastGrid";
 import Loading from "../components/Loading";
 

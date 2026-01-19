@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchPodcastById } from "../api/podcasts";
+import { fetchPodcastById } from "../api/fetchPodcast";
 import SeasonList from "../components/SeasonList";
 import { genreMap } from "../utils/genreMap";
 import { formatDate } from "../utils/formatDate";
