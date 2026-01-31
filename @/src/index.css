@@ -29,6 +29,34 @@ body {
   min-height: 100vh;
 }
 
+/* ===============================
+   Simple Header
+================================ */
+
+header {
+  background: var(--card);        /* Dark background */
+  padding: 1rem 2rem;             /* Some spacing */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;    /* Logo on the left */
+  border-bottom: 1px solid #1f2933;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header a {
+  color: var(--primary);          /* Lime green text */
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: #d9f99d;                 /* Slightly lighter on hover */
+}
+
+
 /* Images */
 img {
   max-width: 100%;
