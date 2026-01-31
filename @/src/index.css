@@ -283,3 +283,77 @@ button {
     max-width: 100%;
   }
 }
+
+/* ===============================
+   Seasons & Episodes
+================================ */
+
+.season-section {
+  margin-top: 3rem;
+}
+
+/* Season dropdown row */
+.season-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.season-header h2 {
+  font-size: 1.5rem;
+}
+
+.season-header select {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--muted);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+/* Episodes */
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.episode-card {
+  display: flex;
+  gap: 1rem;
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 12px;
+  align-items: flex-start;
+}
+
+.episode-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.episode-info h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.episode-info p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .episode-card {
+    flex-direction: column;
+  }
+
+  .episode-image {
+    width: 100%;
+    height: auto;
+  }
+}
