@@ -158,3 +158,61 @@ button {
   border: 1px solid #374151;
   cursor: pointer;
 }
+
+/* ===============================
+   Search & Filter Bar
+================================ */
+
+.search-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+/* Search input first */
+.search-filter-bar input[type="text"] {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #111827;
+  color: #e5e7eb;
+}
+
+.search-filter-bar input::placeholder {
+  color: #9ca3af;
+}
+
+/* Dropdowns */
+.search-filter-bar select {
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #111827;
+  color: #e5e7eb;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+/* Hover + focus */
+.search-filter-bar input:focus,
+.search-filter-bar select:focus {
+  outline: none;
+  border-color: #84cc16;
+}
+
+/* Mobile layout */
+@media (max-width: 640px) {
+  .search-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter-bar select,
+  .search-filter-bar input {
+    width: 100%;
+  }
+}
