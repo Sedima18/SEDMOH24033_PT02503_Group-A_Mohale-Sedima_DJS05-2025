@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PodcastCard from "./PodcastCard";
+import { genreMap } from "../utils/genreMap";
 
 export default function PodcastGrid({ podcasts, search, onSearch }) {
   const [sort, setSort] = useState("newest");
@@ -36,7 +37,6 @@ export default function PodcastGrid({ podcasts, search, onSearch }) {
 
   return (
     <div className="container">
-      {/* Search + Filters */}
       <div className="search-filter-bar">
         <input
           type="text"
@@ -56,13 +56,13 @@ export default function PodcastGrid({ podcasts, search, onSearch }) {
             .filter((g) => g !== "all")
             .map((g) => (
               <option key={g} value={g}>
-                Genre {g}
+                {genreMap[g]}
               </option>
             ))}
         </select>
       </div>
 
-      {/* Podcast Grid */}
+      
       <div className="podcast-grid">
         {filtered.map((podcast) => (
           <PodcastCard key={podcast.id} podcast={podcast} />
