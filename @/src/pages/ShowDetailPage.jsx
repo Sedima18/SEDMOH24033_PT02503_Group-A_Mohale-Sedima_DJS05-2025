@@ -7,7 +7,7 @@
  * - Genre names (mapped from genre IDs)
  * - Total episodes and seasons
  * - Last updated date
- * - Season selector with episode list
+ * - Season navigation with episodes
  */
 
 import { useParams, useNavigate } from "react-router-dom";
@@ -19,11 +19,9 @@ import { formatDate } from "../utils/formatDate";
 import Loading from "../components/Loading";
 
 export default function ShowDetailPage() {
-  /** Get show ID from URL */
   const { id } = useParams();
   const navigate = useNavigate();
 
-  /** Component state */
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -52,29 +50,20 @@ export default function ShowDetailPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  /** Loading & error states */
   if (loading) return <Loading />;
   if (error) return <p className="error">{error}</p>;
   if (!show) return <p>Show not found.</p>;
 
-  /**
-   * Calculate total number of episodes safely
-   * @returns {number}
-   */
+  /** Calculate total episodes safely */
   const totalEpisodes = show.seasons.reduce(
     (total, season) =>
       total + (Array.isArray(season.episodes) ? season.episodes.length : 0),
     0
   );
 
-  /**
-   * Convert genre IDs to readable genre names
-   * @param {number[]} genres
-   * @returns {string}
-   */
+  /** Convert genre IDs to readable genre names */
   const getGenreNames = (genres) => {
     if (!Array.isArray(genres)) return "";
-
     return genres
       .map((id) => genreMap[id])
       .filter(Boolean)
@@ -122,5 +111,5 @@ export default function ShowDetailPage() {
       {/* SEASONS & EPISODES */}
       <SeasonList seasons={show.seasons} />
     </div>
-  );
+);
 }

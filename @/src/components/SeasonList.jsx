@@ -1,77 +1,68 @@
 /**
  * SeasonList
  * ----------
- * Displays a dropdown to select a season and
- * renders episodes for the selected season.
- * Each episode includes an image and description.
+ * Displays expandable seasons with episode lists.
+ * Each episode shows:
+ * - Episode number
+ * - Episode title
+ * - Season image (API does not provide episode-specific images)
+ * - Shortened description
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SeasonList({ seasons }) {
-  /** Currently selected season */
-  const [selectedSeason, setSelectedSeason] = useState(null);
+  /** Currently expanded season ID */
+  const [openSeasonId, setOpenSeasonId] = useState(null);
 
-  /**
-   * Set default season when seasons load
-   */
-  useEffect(() => {
-    if (Array.isArray(seasons) && seasons.length > 0) {
-      setSelectedSeason(seasons[0]);
-    }
-  }, [seasons]);
-
-  if (!selectedSeason) return null;
+  if (!Array.isArray(seasons) || seasons.length === 0) return null;
 
   return (
     <div className="season-section">
-      {/* SEASON HEADER */}
-      <div className="season-header">
-        <h2>Season</h2>
+      {seasons.map((season) => {
+        const isOpen = openSeasonId === season.id;
 
-        <select
-          value={selectedSeason.id}
-          onChange={(e) =>
-            setSelectedSeason(
-              seasons.find(
-                (season) => season.id === Number(e.target.value)
-              )
-            )
-          }
-        >
-          {seasons.map((season) => (
-            <option key={season.id} value={season.id}>
-              {season.title} ({season.episodes.length} episodes)
-            </option>
-          ))}
-        </select>
-      </div>
+        return (
+          <div key={season.id} className="season-block">
+            {/* SEASON HEADER */}
+            <button
+              className="season-toggle"
+              onClick={() => setOpenSeasonId(isOpen ? null : season.id)}
+            >
+              <h3>{season.title}</h3>
+              <span>{season.episodes.length} episodes</span>
+            </button>
 
-      {/* EPISODES */}
-      <div className="episode-list">
-        {selectedSeason.episodes.map((episode) => (
-          <div key={episode.id} className="episode-card">
-            {/* Episode Image */}
-            <img
-              src={episode.image || "/episode-placeholder.png"}
-              alt={episode.title}
-              className="episode-image"
-            />
+            {/* EPISODES */}
+            {isOpen && (
+              <div className="episode-list">
+                {season.episodes.map((episode) => (
+                  <div key={episode.id} className="episode-card">
+                    {/* Use season image for each episode */}
+                    <img
+                      src={season.image || "/episode-placeholder.png"}
+                      alt={season.title}
+                      className="episode-image"
+                    />
 
-            <div className="episode-info">
-              <h4>
-                Episode {episode.episode}: {episode.title}
-              </h4>
+                    <div className="episode-info">
+                      <h4>
+                        Episode {episode.episode}: {episode.title}
+                      </h4>
 
-              <p>
-                {episode.description.length > 140
-                  ? episode.description.slice(0, 140) + "…"
-                  : episode.description}
-              </p>
-            </div>
+                      <p>
+                        {episode.description.length > 140
+                          ? episode.description.slice(0, 140) + "…"
+                          : episode.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
