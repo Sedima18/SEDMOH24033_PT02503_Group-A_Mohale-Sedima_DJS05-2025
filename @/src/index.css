@@ -385,3 +385,47 @@ button {
     height: auto;
   }
 }
+
+/* Hero layout with image on left */
+.show-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* image left, text right */
+  gap: 2rem;
+  align-items: start;
+}
+
+.show-image img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Text info */
+.show-info h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.show-description {
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.show-meta {
+  margin: 0.3rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .show-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .show-image img {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+}
