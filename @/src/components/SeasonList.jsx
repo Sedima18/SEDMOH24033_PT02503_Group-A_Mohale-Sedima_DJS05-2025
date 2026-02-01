@@ -30,7 +30,7 @@ export default function SeasonList({ seasons }) {
     <div className="season-section">
       {/* SEASON HEADER */}
       <div className="season-header">
-        <h2>Season</h2>
+        <h2>Current Season</h2>
 
         {/* Dropdown to select season */}
         <select value={selectedSeason.id} onChange={handleSeasonChange}>
