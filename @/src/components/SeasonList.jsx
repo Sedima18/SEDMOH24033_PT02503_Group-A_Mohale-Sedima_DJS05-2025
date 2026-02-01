@@ -1,11 +1,31 @@
-import { useState } from "react";
+/**
+ * SeasonList
+ * ----------
+ * Displays a dropdown to select a season and
+ * renders episodes for the selected season.
+ * Each episode includes an image and description.
+ */
+
+import { useEffect, useState } from "react";
 
 export default function SeasonList({ seasons }) {
-  const [selectedSeason, setSelectedSeason] = useState(seasons[0]);
+  /** Currently selected season */
+  const [selectedSeason, setSelectedSeason] = useState(null);
+
+  /**
+   * Set default season when seasons load
+   */
+  useEffect(() => {
+    if (Array.isArray(seasons) && seasons.length > 0) {
+      setSelectedSeason(seasons[0]);
+    }
+  }, [seasons]);
+
+  if (!selectedSeason) return null;
 
   return (
     <div className="season-section">
-      {/* Season Header */}
+      {/* SEASON HEADER */}
       <div className="season-header">
         <h2>Season</h2>
 
@@ -27,12 +47,13 @@ export default function SeasonList({ seasons }) {
         </select>
       </div>
 
-      {/* Episodes */}
+      {/* EPISODES */}
       <div className="episode-list">
         {selectedSeason.episodes.map((episode) => (
           <div key={episode.id} className="episode-card">
+            {/* Episode Image */}
             <img
-              src={episode.image}
+              src={episode.image || "/episode-placeholder.png"}
               alt={episode.title}
               className="episode-image"
             />
@@ -41,9 +62,10 @@ export default function SeasonList({ seasons }) {
               <h4>
                 Episode {episode.episode}: {episode.title}
               </h4>
+
               <p>
-                {episode.description.length > 120
-                  ? episode.description.slice(0, 120) + "..."
+                {episode.description.length > 140
+                  ? episode.description.slice(0, 140) + "…"
                   : episode.description}
               </p>
             </div>
